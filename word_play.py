@@ -46,5 +46,21 @@ def avoids_count():
                 if avoids(word,a):
                     count += 1
     print(count)
+    
+def uses_only(word,letters):
+    for i in range(0,len(letters)+1):
+        if letters[i] not in word:
+            return False
+        else:
+            return True
+def words_uses_only():
+    a = input('Put letters that you only want in the words: ')
+    with open("words.txt") as file:
+        count = 0
+        for line in file:
+            for word in line.strip().split():
+                if uses_only(word,a):
+                    count += 1
+    print(count)
 if __name__ == "__main__":
-    avoids_count()
+    words_uses_only()
