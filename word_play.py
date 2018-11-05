@@ -30,13 +30,22 @@ def no_e():
         a = ((count_the / count_th) * 100) // 1
         b = int(a)
         print("{:2}%".format(b))
-        
 def avoids(word,letters):
+    '''
+    >>> avoids('abcde','a')
+    False
+    
+    >>> avoids('bfge','c')
+    True
+    
+    >>> avoids('abced','aere')
+    False
+    '''
     for i in range(0,len(letters)):
         if letters[i] in word:
             return False
-        else:
-            return True
+    else:
+        return True
 def avoids_count():
     a = input('Put letters that you don\'t want in the words: ')
     with open("words.txt") as file:
@@ -48,12 +57,27 @@ def avoids_count():
     print(count)
     
 def uses_only(word,letters):
-    for i in range(0,len(letters)+1):
-        if letters[i] not in word:
-            return False
-        else:
-            return True
-def words_uses_only():
+    '''
+    
+    >>> uses_only('false','flsae')
+    True
+    
+    >>> uses_only('aabe','ab')
+    False
+    '''
+    a = 0
+    for i in range(0,len(word)):
+        if word[i] not in letters:
+            a = 3
+            break 
+        if word[i] in letters:
+            a = 1
+            
+    if a == 3:
+        return False
+    if a == 1:
+        return True
+def words_with_only():
     a = input('Put letters that you only want in the words: ')
     with open("words.txt") as file:
         count = 0
@@ -61,6 +85,35 @@ def words_uses_only():
             for word in line.strip().split():
                 if uses_only(word,a):
                     count += 1
-    print(count)
+                    print(word)
+                    
+def uses_all(word,letters):
+    '''
+
+    >>> uses_all('word','dorw')
+    True
+    >>> uses_all('word','words')
+    False
+    
+    >>> uses_all('school','aglm')
+    False
+
+    >>> uses_all('words','word')
+    False
+    '''
+    a = 0
+    for i in range(0,len(letters)):
+        if letters[i] in word:
+            a += 1
+        if letters[i] not in word:
+            a = 0
+            break
+    if a != len(word):
+        return False
+    if a == len(word):
+        return True
+        
 if __name__ == "__main__":
-    words_uses_only()
+    import doctest
+    doctest.testmod()
+    #uses_all()
