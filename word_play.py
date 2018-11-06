@@ -99,21 +99,31 @@ def uses_all(word,letters):
     False
 
     >>> uses_all('words','word')
-    False
+    True
     '''
     a = 0
-    for i in range(0,len(letters)):
-        if letters[i] in word:
+    for i in range(0,len(word)):
+        if word[i] in letters:
             a += 1
-        if letters[i] not in word:
-            a = 0
-            break
-    if a != len(word):
+        elif word[i] not in letters:
+            a += 0
+    if a < len(letters):
         return False
-    if a == len(word):
+    if a >= len(letters):
         return True
+
+
+def how_many_uses_all():
+    a = input('Put letters that you only want in the words: ')
+    with open("words.txt") as file:
+        count = 0
+        for line in file:
+            for word in line.strip().split():
+                if uses_all(word,a):
+                    count += 1
+        print(count)
         
 if __name__ == "__main__":
     import doctest
     doctest.testmod()
-    #uses_all()
+    how_many_uses_all()
